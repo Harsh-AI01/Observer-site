@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Observer — I observe. I learn. I evolve.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- ████████████████████  CUSTOM CURSOR  ████████████████████ -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- ████████████████████  NOISE OVERLAY  ████████████████████ -->
+<div id="noise-overlay"></div>
+
+<!-- ████████████████████  INTRO SCREEN  ████████████████████ -->
+<div id="intro">
+  <div class="intro-bg" id="intro-bg"></div>
+  <canvas id="rain-canvas"></canvas>
+  <div class="intro-grain"></div>
+  <div class="intro-vignette"></div>
+
+  <!-- Floating particles -->
+  <div id="intro-particles"></div>
+
+  <!-- Corner deco -->
+  <div class="corner-tl">
+    <span class="corner-text">SYS://OBSERVER</span>
+    <div class="corner-line"></div>
+  </div>
+  <div class="corner-br">
+    <div class="corner-line"></div>
+    <span class="corner-text">EST. NOW</span>
+  </div>
+
+  <!-- Main text -->
+  <div class="intro-stage">
+    <div class="intro-pre" id="ipre">— a personal record —</div>
+
+    <div class="intro-lines" id="ilines">
+      <div class="iline" id="il1">
+        <span>Some people chase life.</span>
+        <span class="iline-em">Some try to control it.</span>
+      </div>
+      <div class="iline italic" id="il2">I chose to observe.</div>
+      <div class="intro-gap"></div>
+      <div class="iline dim" id="il3">I made mistakes. I lost focus.</div>
+      <div class="iline dim italic" id="il4">I learned the hard way.</div>
+      <div class="intro-gap"></div>
+      <div class="iline bold" id="il5">But I am not done.</div>
+      <div class="intro-gap lg"></div>
+      <div class="iline final" id="il6">This is not a story.</div>
+      <div class="iline final accent" id="il7">This is a system.</div>
+    </div>
+
+    <div class="intro-enter" id="intro-enter">
+      <button id="enter-btn" class="enter-btn">
+        <div class="enter-inner">
+          <span class="enter-icon">▸</span>
+          <span class="enter-text">Enter System</span>
+        </div>
+        <div class="enter-border"></div>
+      </button>
+      <div class="intro-id-tag">Observer · Anonymous · Present</div>
+    </div>
+  </div>
+
+  <!-- Progress bar -->
+  <div class="intro-progress" id="intro-progress">
+    <div class="intro-progress-fill" id="intro-progress-fill"></div>
+  </div>
+</div>
+
+<!-- ████████████████████  MAIN SITE  ████████████████████ -->
+<div id="site" class="site-hidden">
+
+  <!-- ══ NAV ══ -->
+  <nav id="nav">
+    <div class="nav-left">
+      <div class="nav-logo">
+        <div class="nav-logo-mark">
+          <div class="logo-diamond"></div>
+        </div>
+        <span class="nav-logo-name">Observer</span>
+      </div>
+    </div>
+
+    <div class="nav-center">
+      <a href="#home"  class="nl active" data-section="home">Home</a>
+      <a href="#logs"  class="nl" data-section="logs">Logs</a>
+      <a href="#about" class="nl" data-section="about">About</a>
+    </div>
+
+    <div class="nav-right">
+      <button id="search-btn" class="nav-icon-btn" title="Search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </button>
+      <button id="grid-toggle" class="nav-icon-btn" title="Toggle view">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Search drawer -->
+  <div id="search-drawer" class="search-drawer">
+    <div class="search-wrap">
+      <svg class="search-icon-inner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input id="search-input" type="text" placeholder="Search logs, tags, content…" class="search-field" autocomplete="off"/>
+      <button id="search-close" class="search-x">✕</button>
+    </div>
+    <div id="search-results" class="search-results"></div>
+  </div>
+
+  <!-- ══════════════  HOME  ══════════════ -->
+  <section id="home" class="s-home">
+    <div class="home-parallax-bg" id="home-bg"></div>
+    <div class="home-overlay"></div>
+    <canvas id="home-particles-canvas"></canvas>
+
+    <div class="home-content">
+      <div class="home-eyebrow reveal-up" data-delay="0">Personal System · Observer</div>
+      <h1 class="home-title reveal-up" data-delay="100">
+        <span class="ht-line">I observe.</span>
+        <span class="ht-line italic">I learn.</span>
+        <span class="ht-line">I evolve.</span>
+      </h1>
+      <div class="home-rule reveal-up" data-delay="200"></div>
+      <p class="home-sub reveal-up" data-delay="300">
+        This is not a portfolio.<br/>
+        It is a record — of moments that demanded growth,<br/>
+        of failures that refused to stay silent.
+      </p>
+      <div class="home-actions reveal-up" data-delay="400">
+        <a href="#logs" class="btn-primary">View Logs</a>
+        <a href="#about" class="btn-ghost">About</a>
+      </div>
+    </div>
+
+    <!-- Floating side label -->
+    <div class="home-side-label">
+      <span>scroll to explore</span>
+      <div class="scroll-line"></div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="home-stats reveal-up" data-delay="500">
+      <div class="hstat">
+        <span class="hstat-n" id="hs-logs">0</span>
+        <span class="hstat-l">Experience Logs</span>
+      </div>
+      <div class="hstat-div"></div>
+      <div class="hstat">
+        <span class="hstat-n">∞</span>
+        <span class="hstat-l">Ongoing Learning</span>
+      </div>
+      <div class="hstat-div"></div>
+      <div class="hstat">
+        <span class="hstat-n">1</span>
+        <span class="hstat-l">Anonymous Observer</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════  LOGS  ══════════════ -->
+  <section id="logs" class="s-logs">
+
+    <div class="logs-head reveal-up">
+      <div class="section-eyebrow">Archive</div>
+      <h2 class="section-title">Experience Logs</h2>
+      <p class="section-desc">Every entry is a moment documented. Every moment, a lesson earned.</p>
+    </div>
+
+    <!-- Filter bar -->
+    <div class="filter-row reveal-up">
+      <div class="filter-pills" id="filter-pills">
+        <button class="fpill active" data-f="all">All</button>
+        <button class="fpill" data-f="discipline">Discipline</button>
+        <button class="fpill" data-f="reality">Reality</button>
+        <button class="fpill" data-f="growth">Growth</button>
+        <button class="fpill" data-f="conflict">Conflict</button>
+        <button class="fpill" data-f="reflection">Reflection</button>
+      </div>
+      <div class="log-count" id="log-count">— logs</div>
+    </div>
+
+    <!-- Grid -->
+    <div class="logs-grid" id="logs-grid"></div>
+
+    <!-- Timeline toggle view -->
+    <div class="logs-timeline hidden" id="logs-timeline"></div>
+
+  </section>
+
+  <!-- ══════════════  ABOUT  ══════════════ -->
+  <section id="about" class="s-about">
+    <div class="about-bg" id="about-bg"></div>
+    <div class="about-overlay"></div>
+
+    <div class="about-inner">
+      <div class="about-left reveal-up">
+        <div class="section-eyebrow">Identity</div>
+        <h2 class="section-title">The Observer</h2>
+        <div class="about-quote">
+          <div class="aq-mark">"</div>
+          <p class="aq-text">I do not claim to have answers.<br/>I have observations.</p>
+        </div>
+        <div class="about-body">
+          <p>Every failure, every missed deadline, every wrong turn — these are not scars. They are data points. This system exists to document the process of becoming — not the destination, but the quiet work between decisions.</p>
+          <p>Anonymous by design. Present by intention. Evolving without permission.</p>
+        </div>
+        <div class="about-sig">
+          <div class="sig-line"></div>
+          <span>Observer</span>
+        </div>
+      </div>
+
+      <div class="about-right reveal-up" data-delay="150">
+        <div class="about-img-stack">
+          <div class="aimg aimg-1" id="aimg1"></div>
+          <div class="aimg aimg-2" id="aimg2"></div>
+          <div class="aimg-label">
+            <span class="ail-dot"></span>
+            <span>Active System</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════  FOOTER  ══════════════ -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="ft-logo">◆ Observer</div>
+      <div class="ft-tag">I observe. I learn. I evolve.</div>
+      <div class="ft-hint">Press Ctrl+Shift+O for admin access</div>
+    </div>
+    <div class="footer-bottom">
+      <span class="fb-left">Personal System · Anonymous</span>
+      <span class="fb-right">Built with intent.</span>
+    </div>
+  </footer>
+
+</div><!-- /#site -->
+
+<!-- ████████████████████  LOG MODAL  ████████████████████ -->
+<div id="log-modal" class="log-modal">
+  <div id="modal-overlay" class="modal-overlay"></div>
+  <div class="modal-shell" id="modal-shell">
+    <button class="modal-close" id="modal-close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-progress-bar" id="modal-progress"></div>
+    <div class="modal-content" id="modal-content"></div>
+  </div>
+</div>
+
+<!-- ████████████████████  ADMIN PANEL  ████████████████████ -->
+<div id="admin" class="admin hidden">
+  <div class="admin-veil" id="admin-veil"></div>
+  <div class="admin-shell">
+
+    <div class="admin-hd">
+      <div class="admin-hd-left">
+        <span class="admin-diamond">◆</span>
+        <span class="admin-hd-title">System Admin</span>
+      </div>
+      <button id="admin-close" class="admin-x">✕</button>
+    </div>
+
+    <!-- Auth -->
+    <div class="admin-auth" id="admin-auth">
+      <div class="auth-icon">◈</div>
+      <p class="auth-label">Authentication Required</p>
+      <input type="password" id="admin-pass" class="adm-input" placeholder="Enter passphrase…"/>
+      <button id="admin-login" class="adm-btn primary">Authenticate</button>
+      <p class="auth-hint">Default: <code>observer2024</code></p>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="admin-dash hidden" id="admin-dash">
+      <div class="adm-tabs">
+        <button class="adm-tab active" data-tab="create">✦ New Log</button>
+        <button class="adm-tab" data-tab="manage">✦ Manage</button>
+      </div>
+
+      <!-- TAB: Create -->
+      <div class="adm-panel active" id="tab-create">
+        <div class="adm-form">
+          <div class="af-row two">
+            <div class="af-field">
+              <label class="af-label">Title</label>
+              <input type="text" id="f-title" class="adm-input" placeholder="Log title…"/>
+            </div>
+            <div class="af-field">
+              <label class="af-label">Date</label>
+              <input type="date" id="f-date" class="adm-input"/>
+            </div>
+          </div>
+          <div class="af-row two">
+            <div class="af-field">
+              <label class="af-label">Tags (comma separated)</label>
+              <input type="text" id="f-tags" class="adm-input" placeholder="growth, reflection…"/>
+            </div>
+            <div class="af-field">
+              <label class="af-label">Type</label>
+              <select id="f-type" class="adm-input">
+                <option value="text">Text</option>
+                <option value="video">Video</option>
+                <option value="mixed">Mixed</option>
+              </select>
+            </div>
+          </div>
+          <div class="af-row">
+            <div class="af-field">
+              <label class="af-label">Thumbnail URL</label>
+              <input type="text" id="f-thumb" class="adm-input" placeholder="https://…"/>
+            </div>
+          </div>
+
+          <div class="af-blocks-label">
+            <span>Content Blocks</span>
+            <div class="af-block-btns">
+              <button class="adm-btn ghost sm" onclick="addBlock('text')">+ Text</button>
+              <button class="adm-btn ghost sm" onclick="addBlock('image')">+ Image</button>
+              <button class="adm-btn ghost sm" onclick="addBlock('video')">+ Video</button>
+            </div>
+          </div>
+          <div id="blocks-list"></div>
+
+          <div class="preview-row">
+            <button class="preview-toggle-btn" id="preview-toggle">▸ Live Preview</button>
+          </div>
+          <div class="adm-preview hidden" id="adm-preview"></div>
+
+          <button class="adm-btn primary full" id="save-btn">Save Log</button>
+        </div>
+      </div>
+
+      <!-- TAB: Manage -->
+      <div class="adm-panel hidden" id="tab-manage">
+        <div id="manage-list" class="manage-list"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
