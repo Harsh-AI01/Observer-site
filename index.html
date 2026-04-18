@@ -1,352 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Observer — I observe. I learn. I evolve.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Abhi P.S.P — Observer System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=DM+Sans:wght@200;300;400;500&family=Cinzel:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<!-- ████████████████████  CUSTOM CURSOR  ████████████████████ -->
+<!-- CURSOR -->
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
 
-<!-- ████████████████████  NOISE OVERLAY  ████████████████████ -->
-<div id="noise-overlay"></div>
+<!-- NOISE -->
+<div id="noise"></div>
 
-<!-- ████████████████████  INTRO SCREEN  ████████████████████ -->
+<!-- ████  INTRO  ████ -->
 <div id="intro">
   <div class="intro-bg" id="intro-bg"></div>
-  <canvas id="rain-canvas"></canvas>
-  <div class="intro-grain"></div>
+  <canvas id="rain-cv"></canvas>
   <div class="intro-vignette"></div>
+  <div id="intro-ptcl"></div>
 
-  <!-- Floating particles -->
-  <div id="intro-particles"></div>
-
-  <!-- Corner deco -->
-  <div class="corner-tl">
-    <span class="corner-text">SYS://OBSERVER</span>
-    <div class="corner-line"></div>
+  <div class="intro-corner tl">
+    <span>SYS://OBSERVER</span><div class="cl"></div>
   </div>
-  <div class="corner-br">
-    <div class="corner-line"></div>
-    <span class="corner-text">EST. NOW</span>
+  <div class="intro-corner br">
+    <div class="cl"></div><span>IDENTITY ACTIVE</span>
   </div>
 
-  <!-- Main text -->
-  <div class="intro-stage">
-    <div class="intro-pre" id="ipre">— a personal record —</div>
-
-    <div class="intro-lines" id="ilines">
-      <div class="iline" id="il1">
-        <span>Some people chase life.</span>
-        <span class="iline-em">Some try to control it.</span>
-      </div>
-      <div class="iline italic" id="il2">I chose to observe.</div>
-      <div class="intro-gap"></div>
-      <div class="iline dim" id="il3">I made mistakes. I lost focus.</div>
-      <div class="iline dim italic" id="il4">I learned the hard way.</div>
-      <div class="intro-gap"></div>
-      <div class="iline bold" id="il5">But I am not done.</div>
-      <div class="intro-gap lg"></div>
-      <div class="iline final" id="il6">This is not a story.</div>
-      <div class="iline final accent" id="il7">This is a system.</div>
+  <div class="intro-center">
+    <div class="intro-tag" id="itag">— personal record system —</div>
+    <div class="intro-lines">
+      <div class="il" id="il1">Some people chase life. <em>Some try to control it.</em></div>
+      <div class="il" id="il2">I chose to observe.</div>
+      <div class="il sm" id="il3">I made mistakes. I lost focus. I learned the hard way.</div>
+      <div class="il bold" id="il4">But I am not done.</div>
+      <div class="il final" id="il5">This is not a story.</div>
+      <div class="il final gold" id="il6">This is a system.</div>
     </div>
-
-    <div class="intro-enter" id="intro-enter">
-      <button id="enter-btn" class="enter-btn">
-        <div class="enter-inner">
-          <span class="enter-icon">▸</span>
-          <span class="enter-text">Enter System</span>
-        </div>
-        <div class="enter-border"></div>
+    <div class="intro-enter" id="ienter">
+      <button id="enter-btn">
+        <span class="eb-icon">▸</span>
+        <span class="eb-txt">Enter System</span>
+        <div class="eb-border"></div>
       </button>
-      <div class="intro-id-tag">Observer · Anonymous · Present</div>
+      <p class="intro-id">Abhi P.S.P &nbsp;·&nbsp; I observe. I learn. I evolve.</p>
     </div>
   </div>
 
-  <!-- Progress bar -->
-  <div class="intro-progress" id="intro-progress">
-    <div class="intro-progress-fill" id="intro-progress-fill"></div>
-  </div>
+  <div class="intro-prog"><div id="intro-fill"></div></div>
 </div>
 
-<!-- ████████████████████  MAIN SITE  ████████████████████ -->
-<div id="site" class="site-hidden">
+<!-- ████  SITE  ████ -->
+<div id="site" class="site-off">
 
-  <!-- ══ NAV ══ -->
+  <!-- NAV -->
   <nav id="nav">
-    <div class="nav-left">
-      <div class="nav-logo">
-        <div class="nav-logo-mark">
-          <div class="logo-diamond"></div>
-        </div>
-        <span class="nav-logo-name">Observer</span>
-      </div>
+    <div class="nav-logo">
+      <div class="nl-gem"></div>
+      <span class="nl-name">Abhi P.S.P</span>
     </div>
-
-    <div class="nav-center">
-      <a href="#home"  class="nl active" data-section="home">Home</a>
-      <a href="#logs"  class="nl" data-section="logs">Logs</a>
-      <a href="#about" class="nl" data-section="about">About</a>
+    <div class="nav-links">
+      <a href="#home"       class="nv active" data-s="home">Home</a>
+      <a href="#logs"       class="nv" data-s="logs">Logs</a>
+      <a href="#soundscape" class="nv" data-s="soundscape">Soundscape</a>
+      <a href="#about"      class="nv" data-s="about">About</a>
+      <a href="#feedback"   class="nv" data-s="feedback">Feedback</a>
     </div>
-
-    <div class="nav-right">
-      <button id="search-btn" class="nav-icon-btn" title="Search">
+    <div class="nav-acts">
+      <button id="search-btn" class="nav-ico" title="Search">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      </button>
-      <button id="grid-toggle" class="nav-icon-btn" title="Toggle view">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
       </button>
     </div>
   </nav>
 
-  <!-- Search drawer -->
-  <div id="search-drawer" class="search-drawer">
-    <div class="search-wrap">
-      <svg class="search-icon-inner" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="search-input" type="text" placeholder="Search logs, tags, content…" class="search-field" autocomplete="off"/>
-      <button id="search-close" class="search-x">✕</button>
+  <!-- SEARCH -->
+  <div id="search-bar" class="search-bar">
+    <div class="sb-inner">
+      <input id="search-input" type="text" placeholder="Search logs…" autocomplete="off"/>
+      <button id="search-x">✕</button>
     </div>
-    <div id="search-results" class="search-results"></div>
   </div>
 
-  <!-- ══════════════  HOME  ══════════════ -->
+  <!-- ══ HOME ══ -->
   <section id="home" class="s-home">
-    <div class="home-parallax-bg" id="home-bg"></div>
-    <div class="home-overlay"></div>
-    <canvas id="home-particles-canvas"></canvas>
-
-    <div class="home-content">
-      <div class="home-eyebrow reveal-up" data-delay="0">Personal System · Observer</div>
-      <h1 class="home-title reveal-up" data-delay="100">
-        <span class="ht-line">I observe.</span>
-        <span class="ht-line italic">I learn.</span>
-        <span class="ht-line">I evolve.</span>
-      </h1>
-      <div class="home-rule reveal-up" data-delay="200"></div>
-      <p class="home-sub reveal-up" data-delay="300">
-        This is not a portfolio.<br/>
-        It is a record — of moments that demanded growth,<br/>
-        of failures that refused to stay silent.
+    <div class="home-bg" id="home-bg"></div>
+    <div class="home-ov"></div>
+    <canvas id="home-cv"></canvas>
+    <div class="home-body">
+      <p class="eye rv" data-d="0">Personal System · Est. Now</p>
+      <h1 class="home-name rv" data-d="100">Abhi P.S.P</h1>
+      <div class="home-tag-wrap rv" data-d="200">
+        <div class="home-rule"></div>
+        <p class="home-tagline">I observe. I learn. I evolve.</p>
+        <div class="home-rule"></div>
+      </div>
+      <p class="home-desc rv" data-d="300">
+        This is not a portfolio. Not a journal.<br/>
+        It is a system — of moments, failures, and quiet growth.
       </p>
-      <div class="home-actions reveal-up" data-delay="400">
-        <a href="#logs" class="btn-primary">View Logs</a>
-        <a href="#about" class="btn-ghost">About</a>
+      <div class="home-btns rv" data-d="400">
+        <a href="#logs" class="btn-g">View Logs</a>
+        <a href="#about" class="btn-o">About</a>
+      </div>
+      <div class="home-stats rv" data-d="500">
+        <div class="hs"><span class="hs-n" id="hs-count">0</span><span class="hs-l">Experience Logs</span></div>
+        <div class="hs-sep"></div>
+        <div class="hs"><span class="hs-n">7</span><span class="hs-l">Phases Documented</span></div>
+        <div class="hs-sep"></div>
+        <div class="hs"><span class="hs-n">∞</span><span class="hs-l">Ongoing Learning</span></div>
       </div>
     </div>
-
-    <!-- Floating side label -->
-    <div class="home-side-label">
-      <span>scroll to explore</span>
-      <div class="scroll-line"></div>
-    </div>
-
-    <!-- Stats bar -->
-    <div class="home-stats reveal-up" data-delay="500">
-      <div class="hstat">
-        <span class="hstat-n" id="hs-logs">0</span>
-        <span class="hstat-l">Experience Logs</span>
-      </div>
-      <div class="hstat-div"></div>
-      <div class="hstat">
-        <span class="hstat-n">∞</span>
-        <span class="hstat-l">Ongoing Learning</span>
-      </div>
-      <div class="hstat-div"></div>
-      <div class="hstat">
-        <span class="hstat-n">1</span>
-        <span class="hstat-l">Anonymous Observer</span>
-      </div>
+    <div class="home-scroll-hint">
+      <span>scroll</span>
+      <div class="sh-line"></div>
     </div>
   </section>
 
-  <!-- ══════════════  LOGS  ══════════════ -->
+  <!-- ══ LOGS ══ -->
   <section id="logs" class="s-logs">
-
-    <div class="logs-head reveal-up">
-      <div class="section-eyebrow">Archive</div>
-      <h2 class="section-title">Experience Logs</h2>
-      <p class="section-desc">Every entry is a moment documented. Every moment, a lesson earned.</p>
+    <div class="sec-head rv">
+      <p class="eye">Archive</p>
+      <h2 class="sec-title">Experience Logs</h2>
+      <p class="sec-sub">Every entry is a moment worth documenting.</p>
     </div>
-
-    <!-- Filter bar -->
-    <div class="filter-row reveal-up">
-      <div class="filter-pills" id="filter-pills">
-        <button class="fpill active" data-f="all">All</button>
-        <button class="fpill" data-f="discipline">Discipline</button>
-        <button class="fpill" data-f="reality">Reality</button>
-        <button class="fpill" data-f="growth">Growth</button>
-        <button class="fpill" data-f="conflict">Conflict</button>
-        <button class="fpill" data-f="reflection">Reflection</button>
+    <div class="filter-wrap rv">
+      <div id="filter-pills" class="filter-pills">
+        <button class="fp active" data-f="all">All</button>
+        <button class="fp" data-f="discipline">Discipline</button>
+        <button class="fp" data-f="reality">Reality</button>
+        <button class="fp" data-f="growth">Growth</button>
+        <button class="fp" data-f="conflict">Conflict</button>
+        <button class="fp" data-f="reflection">Reflection</button>
+        <button class="fp" data-f="awareness">Awareness</button>
       </div>
-      <div class="log-count" id="log-count">— logs</div>
+      <span id="log-count" class="log-count"></span>
     </div>
-
-    <!-- Grid -->
-    <div class="logs-grid" id="logs-grid"></div>
-
-    <!-- Timeline toggle view -->
-    <div class="logs-timeline hidden" id="logs-timeline"></div>
-
+    <div id="logs-grid" class="logs-grid"></div>
   </section>
 
-  <!-- ══════════════  ABOUT  ══════════════ -->
+  <!-- ══ SOUNDSCAPE ══ -->
+  <section id="soundscape" class="s-sound">
+    <div class="sound-bg" id="sound-bg"></div>
+    <div class="sound-ov"></div>
+    <div class="sound-inner rv">
+      <p class="eye">Atmosphere</p>
+      <h2 class="sec-title">Soundscape</h2>
+      <p class="sec-sub">Each log carries its own sonic layer. Choose a mood.</p>
+      <div id="sound-grid" class="sound-grid"></div>
+    </div>
+  </section>
+
+  <!-- ══ ABOUT ══ -->
   <section id="about" class="s-about">
     <div class="about-bg" id="about-bg"></div>
-    <div class="about-overlay"></div>
-
+    <div class="about-ov"></div>
     <div class="about-inner">
-      <div class="about-left reveal-up">
-        <div class="section-eyebrow">Identity</div>
-        <h2 class="section-title">The Observer</h2>
-        <div class="about-quote">
-          <div class="aq-mark">"</div>
-          <p class="aq-text">I do not claim to have answers.<br/>I have observations.</p>
-        </div>
-        <div class="about-body">
-          <p>Every failure, every missed deadline, every wrong turn — these are not scars. They are data points. This system exists to document the process of becoming — not the destination, but the quiet work between decisions.</p>
-          <p>Anonymous by design. Present by intention. Evolving without permission.</p>
+      <div class="about-left rv">
+        <p class="eye">Identity</p>
+        <h2 class="sec-title">The Observer</h2>
+        <blockquote class="about-quote">
+          <span class="bq-mark">"</span>
+          <p>I do not claim to have answers.<br/>I have observations.</p>
+        </blockquote>
+        <div class="about-txt">
+          <p>Every failure, every missed deadline, every wrong turn — these are not scars. They are data points recorded in this system.</p>
+          <p>This exists to document the process of becoming — not the destination, but the quiet work between decisions.</p>
+          <p><em>Anonymous by design. Present by intention. Evolving without permission.</em></p>
         </div>
         <div class="about-sig">
-          <div class="sig-line"></div>
-          <span>Observer</span>
+          <div class="sig-l"></div>
+          <span>Abhi P.S.P</span>
         </div>
       </div>
-
-      <div class="about-right reveal-up" data-delay="150">
-        <div class="about-img-stack">
-          <div class="aimg aimg-1" id="aimg1"></div>
-          <div class="aimg aimg-2" id="aimg2"></div>
-          <div class="aimg-label">
-            <span class="ail-dot"></span>
-            <span>Active System</span>
-          </div>
+      <div class="about-right rv" data-d="150">
+        <div class="aimg-stack">
+          <div class="aimg ai1" id="ai1"></div>
+          <div class="aimg ai2" id="ai2"></div>
+          <div class="aimg-badge"><span class="aib-dot"></span><span>Active System</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══════════════  FOOTER  ══════════════ -->
-  <footer id="footer">
-    <div class="footer-top">
-      <div class="ft-logo">◆ Observer</div>
-      <div class="ft-tag">I observe. I learn. I evolve.</div>
-      <div class="ft-hint">Press Ctrl+Shift+O for admin access</div>
+  <!-- ══ FEEDBACK ══ -->
+  <section id="feedback" class="s-feedback">
+    <div class="fb-inner rv">
+      <p class="eye">Connect</p>
+      <h2 class="sec-title">Leave a Note</h2>
+      <p class="sec-sub">Anonymous messages welcome. All stored locally.</p>
+      <div class="fb-layout">
+        <div class="fb-form">
+          <div class="ff-row">
+            <label class="ff-label">Name (optional)</label>
+            <input type="text" id="fb-name" class="ff-input" placeholder="Anonymous"/>
+          </div>
+          <div class="ff-row">
+            <label class="ff-label">Message</label>
+            <textarea id="fb-msg" class="ff-input ff-ta" placeholder="Write your thought…" rows="4"></textarea>
+          </div>
+          <button id="fb-submit" class="btn-g">Send Note</button>
+        </div>
+        <div class="fb-list" id="fb-list">
+          <p class="fb-empty" id="fb-empty">No notes yet. Be the first.</p>
+        </div>
+      </div>
     </div>
-    <div class="footer-bottom">
-      <span class="fb-left">Personal System · Anonymous</span>
-      <span class="fb-right">Built with intent.</span>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="footer">
+    <div class="ft-top">
+      <span class="ft-logo">◆ Abhi P.S.P</span>
+      <span class="ft-tag">I observe. I learn. I evolve.</span>
+      <span class="ft-hint">Ctrl+Shift+O → Admin</span>
+    </div>
+    <div class="ft-bot">
+      <span>Observer System · Personal</span>
+      <span>Built with intent.</span>
     </div>
   </footer>
 
 </div><!-- /#site -->
 
-<!-- ████████████████████  LOG MODAL  ████████████████████ -->
+<!-- ████  LOG MODAL  ████ -->
 <div id="log-modal" class="log-modal">
-  <div id="modal-overlay" class="modal-overlay"></div>
+  <div id="modal-ov" class="modal-ov"></div>
   <div class="modal-shell" id="modal-shell">
+    <div class="modal-prog" id="modal-prog"></div>
     <button class="modal-close" id="modal-close">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <div class="modal-progress-bar" id="modal-progress"></div>
-    <div class="modal-content" id="modal-content"></div>
+    <div id="modal-body"></div>
   </div>
 </div>
 
-<!-- ████████████████████  ADMIN PANEL  ████████████████████ -->
+<!-- ████  ADMIN  ████ -->
 <div id="admin" class="admin hidden">
-  <div class="admin-veil" id="admin-veil"></div>
-  <div class="admin-shell">
-
-    <div class="admin-hd">
-      <div class="admin-hd-left">
-        <span class="admin-diamond">◆</span>
-        <span class="admin-hd-title">System Admin</span>
-      </div>
-      <button id="admin-close" class="admin-x">✕</button>
+  <div class="adm-veil" id="adm-veil"></div>
+  <div class="adm-shell">
+    <div class="adm-hd">
+      <div class="adm-hdl"><span class="adm-gem">◆</span><span class="adm-title">System Admin</span></div>
+      <button id="adm-close">✕</button>
     </div>
 
     <!-- Auth -->
-    <div class="admin-auth" id="admin-auth">
-      <div class="auth-icon">◈</div>
-      <p class="auth-label">Authentication Required</p>
-      <input type="password" id="admin-pass" class="adm-input" placeholder="Enter passphrase…"/>
-      <button id="admin-login" class="adm-btn primary">Authenticate</button>
-      <p class="auth-hint">Default: <code>observer2024</code></p>
+    <div id="adm-auth" class="adm-section">
+      <div class="auth-ico">◈</div>
+      <p class="auth-lbl">Authentication Required</p>
+      <input type="password" id="adm-pass" class="ai" placeholder="Passphrase…"/>
+      <button id="adm-login" class="btn-g full mt">Authenticate</button>
+      <p class="auth-hint">Default: <code>abhi2024</code></p>
     </div>
 
     <!-- Dashboard -->
-    <div class="admin-dash hidden" id="admin-dash">
+    <div id="adm-dash" class="adm-section hidden">
       <div class="adm-tabs">
-        <button class="adm-tab active" data-tab="create">✦ New Log</button>
-        <button class="adm-tab" data-tab="manage">✦ Manage</button>
+        <button class="at active" data-t="create">✦ New Log</button>
+        <button class="at" data-t="manage">✦ Manage</button>
+        <button class="at" data-t="settings">✦ Settings</button>
       </div>
 
-      <!-- TAB: Create -->
-      <div class="adm-panel active" id="tab-create">
-        <div class="adm-form">
-          <div class="af-row two">
-            <div class="af-field">
-              <label class="af-label">Title</label>
-              <input type="text" id="f-title" class="adm-input" placeholder="Log title…"/>
-            </div>
-            <div class="af-field">
-              <label class="af-label">Date</label>
-              <input type="date" id="f-date" class="adm-input"/>
-            </div>
-          </div>
-          <div class="af-row two">
-            <div class="af-field">
-              <label class="af-label">Tags (comma separated)</label>
-              <input type="text" id="f-tags" class="adm-input" placeholder="growth, reflection…"/>
-            </div>
-            <div class="af-field">
-              <label class="af-label">Type</label>
-              <select id="f-type" class="adm-input">
-                <option value="text">Text</option>
-                <option value="video">Video</option>
-                <option value="mixed">Mixed</option>
-              </select>
-            </div>
-          </div>
-          <div class="af-row">
-            <div class="af-field">
-              <label class="af-label">Thumbnail URL</label>
-              <input type="text" id="f-thumb" class="adm-input" placeholder="https://…"/>
-            </div>
-          </div>
+      <!-- CREATE -->
+      <div class="ap active" id="ap-create">
+        <div class="af2"><div class="af-f"><label class="al">Title</label><input type="text" id="f-title" class="ai" placeholder="Log title…"/></div><div class="af-f"><label class="al">Date</label><input type="date" id="f-date" class="ai"/></div></div>
+        <div class="af2"><div class="af-f"><label class="al">Tags (comma separated)</label><input type="text" id="f-tags" class="ai" placeholder="growth, reflection…"/></div><div class="af-f"><label class="al">Type</label><select id="f-type" class="ai"><option value="text">Text</option><option value="video">Video</option><option value="mixed">Mixed</option></select></div></div>
+        <div class="af-f"><label class="al">Thumbnail URL</label><input type="text" id="f-thumb" class="ai" placeholder="https://…" oninput="previewThumb(this.value)"/></div>
+        <div id="thumb-preview" class="thumb-preview hidden"></div>
+        <div class="af2"><div class="af-f"><label class="al">Mood Image 1</label><input type="text" id="f-m1" class="ai" placeholder="https://…"/></div><div class="af-f"><label class="al">Mood Image 2</label><input type="text" id="f-m2" class="ai" placeholder="https://…"/></div></div>
+        <div class="af-f"><label class="al">Mood Image 3</label><input type="text" id="f-m3" class="ai" placeholder="https://…"/></div>
+        <div class="af2"><div class="af-f"><label class="al">Soundtrack Title</label><input type="text" id="f-stitle" class="ai" placeholder="Playlist name…"/></div><div class="af-f"><label class="al">Spotify Embed URL</label><input type="text" id="f-slink" class="ai" placeholder="https://open.spotify.com/embed/…"/></div></div>
 
-          <div class="af-blocks-label">
-            <span>Content Blocks</span>
-            <div class="af-block-btns">
-              <button class="adm-btn ghost sm" onclick="addBlock('text')">+ Text</button>
-              <button class="adm-btn ghost sm" onclick="addBlock('image')">+ Image</button>
-              <button class="adm-btn ghost sm" onclick="addBlock('video')">+ Video</button>
-            </div>
+        <div class="blocks-hd">
+          <span class="al">Content Blocks</span>
+          <div class="blk-btns">
+            <button class="btn-o sm" onclick="addBlock('text')">+ Text</button>
+            <button class="btn-o sm" onclick="addBlock('image')">+ Image</button>
+            <button class="btn-o sm" onclick="addBlock('video')">+ Video</button>
           </div>
-          <div id="blocks-list"></div>
+        </div>
+        <div id="blocks-list"></div>
 
-          <div class="preview-row">
-            <button class="preview-toggle-btn" id="preview-toggle">▸ Live Preview</button>
-          </div>
-          <div class="adm-preview hidden" id="adm-preview"></div>
+        <button class="preview-tog" id="prev-tog">▸ Live Preview</button>
+        <div id="adm-preview" class="adm-preview hidden"></div>
 
-          <button class="adm-btn primary full" id="save-btn">Save Log</button>
+        <div class="adm-save-row">
+          <label class="autosave-chk"><input type="checkbox" id="autosave-chk"/> Auto-save draft</label>
+          <button id="save-btn" class="btn-g">Save Log</button>
         </div>
       </div>
 
-      <!-- TAB: Manage -->
-      <div class="adm-panel hidden" id="tab-manage">
+      <!-- MANAGE -->
+      <div class="ap hidden" id="ap-manage">
         <div id="manage-list" class="manage-list"></div>
       </div>
-    </div>
 
+      <!-- SETTINGS -->
+      <div class="ap hidden" id="ap-settings">
+        <div class="setting-item">
+          <span class="al">Clear all logs (reset to defaults)</span>
+          <button class="btn-danger" id="reset-logs">Reset Logs</button>
+        </div>
+        <div class="setting-item">
+          <span class="al">Clear all feedback</span>
+          <button class="btn-danger" id="reset-feedback">Clear Feedback</button>
+        </div>
+        <div class="setting-item">
+          <span class="al">Export logs as JSON</span>
+          <button class="btn-o" id="export-logs">Export</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
